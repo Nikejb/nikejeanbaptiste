@@ -8,712 +8,739 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#F3F4F1;
-    --panel:#FFFFFF;
-    --ink:#12213A;
-    --ink-soft:#55617A;
-    --line:#DBDFD6;
-    --blue:#2E5EAA;
-    --blue-deep:#1C3E73;
-    --amber:#D98B2B;
-    --green:#3E8E5A;
-    --sans:'IBM Plex Sans', system-ui, sans-serif;
-    --mono:'IBM Plex Mono', 'Courier New', monospace;
-    --sidebar-w:250px;
-  }
+ :root{
+ --bg:#F3F4F1;
+ --panel:#FFFFFF;
+ --ink:#12213A;
+ --ink-soft:#55617A;
+ --line:#DBDFD6;
+ --blue:#2E5EAA;
+ --blue-deep:#1C3E73;
+ --amber:#D98B2B;
+ --green:#3E8E5A;
+ --sans:'IBM Plex Sans', system-ui, sans-serif;
+ --mono:'IBM Plex Mono', 'Courier New', monospace;
+ --sidebar-w:250px;
+ }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    line-height:1.55;
-  }
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:.35;
-    z-index:0;
-  }
-  a{color:inherit;}
-  h1,h2,h3{margin:0;font-family:var(--sans);}
-  ul{margin:0;padding:0;list-style:none;}
-  p{margin:0;}
+ *{box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ html,body{max-width:100%;overflow-x:hidden;}
+ body{
+ margin:0;
+ background:var(--bg);
+ color:var(--ink);
+ font-family:var(--sans);
+ line-height:1.55;
+ }
+ img,svg{max-width:100%;height:auto;}
+ body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ background-image:
+ linear-gradient(var(--line) 1px, transparent 1px),
+ linear-gradient(90deg, var(--line) 1px, transparent 1px);
+ background-size:64px 64px;
+ opacity:.35;
+ z-index:0;
+ }
+ a{color:inherit;}
+ h1,h2,h3{margin:0;font-family:var(--sans);}
+ ul{margin:0;padding:0;list-style:none;}
+ p{margin:0;}
 
-  .label{
-    font-family:var(--mono);
-    font-size:.72rem;
-    letter-spacing:.02em;
-    color:var(--blue);
-  }
+ .label{
+ font-family:var(--mono);
+ font-size:.72rem;
+ letter-spacing:.02em;
+ color:var(--blue);
+ }
 
-  /* ---------- Sidebar ---------- */
-  .sidebar{
-    position:fixed;
-    top:0; left:0; bottom:0;
-    width:var(--sidebar-w);
-    background:var(--blue-deep);
-    color:#EDF1F8;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:34px 28px;
-    z-index:10;
-  }
-  .sidebar .id{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-  }
-  .sidebar .id .mark{
-    width:38px;height:38px;
-    border:1.5px solid #6E90C9;
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);
-    font-weight:600;
-    font-size:.9rem;
-    color:#EDF1F8;
-    margin-bottom:14px;
-  }
-  .sidebar .id h1{font-size:1.05rem;font-weight:600;color:#fff;}
-  .sidebar .id span{font-family:var(--mono);font-size:.72rem;color:#9FB6DE;}
+ /* ---------- Sidebar ---------- */
+ .sidebar{
+ position:fixed;
+ top:0; left:0; bottom:0;
+ width:var(--sidebar-w);
+ background:var(--blue-deep);
+ color:#EDF1F8;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ padding:34px 28px;
+ z-index:10;
+ }
+ .sidebar .id{
+ display:flex;
+ flex-direction:column;
+ gap:4px;
+ }
+ .sidebar .id .mark{
+ width:38px;height:38px;
+ border:1.5px solid #6E90C9;
+ display:flex;align-items:center;justify-content:center;
+ font-family:var(--mono);
+ font-weight:600;
+ font-size:.9rem;
+ color:#EDF1F8;
+ margin-bottom:14px;
+ }
+ .sidebar .id h1{font-size:1.05rem;font-weight:600;color:#fff;}
+ .sidebar .id span{font-family:var(--mono);font-size:.72rem;color:#9FB6DE;}
 
-  .sidebar nav{margin-top:44px;}
-  .sidebar nav a{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:9px 0;
-    font-size:.86rem;
-    color:#C7D4EA;
-    text-decoration:none;
-    border-left:2px solid transparent;
-    padding-left:12px;
-    margin-left:-13px;
-    transition:color .15s ease, border-color .15s ease;
-  }
-  .sidebar nav a .dot{
-    width:5px;height:5px;
-    background:#5A76A6;
-    border-radius:50%;
-    flex:none;
-  }
-  .sidebar nav a.active,
-  .sidebar nav a:hover{
-    color:#fff;
-    border-left-color:var(--amber);
-  }
-  .sidebar nav a.active .dot,
-  .sidebar nav a:hover .dot{background:var(--amber);}
+ .sidebar nav{margin-top:44px;}
+ .sidebar nav a{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:9px 0;
+ font-size:.86rem;
+ color:#C7D4EA;
+ text-decoration:none;
+ border-left:2px solid transparent;
+ padding-left:12px;
+ margin-left:-13px;
+ transition:color .15s ease, border-color .15s ease;
+ }
+ .sidebar nav a .dot{
+ width:5px;height:5px;
+ background:#5A76A6;
+ border-radius:50%;
+ flex:none;
+ }
+ .sidebar nav a.active,
+ .sidebar nav a:hover{
+ color:#fff;
+ border-left-color:var(--amber);
+ }
+ .sidebar nav a.active .dot,
+ .sidebar nav a:hover .dot{background:var(--amber);}
 
-  .sidebar .foot{
-    font-family:var(--mono);
-    font-size:.68rem;
-    color:#7C93BD;
-    line-height:1.7;
-  }
-  .sidebar .foot a{text-decoration:none;color:#B9CAE6;}
-  .sidebar .foot a:hover{color:#fff;}
+ .sidebar .foot{
+ font-family:var(--mono);
+ font-size:.68rem;
+ color:#7C93BD;
+ line-height:1.7;
+ }
+ .sidebar .foot a{text-decoration:none;color:#B9CAE6;}
+ .sidebar .foot a:hover{color:#fff;}
 
-  .menu-toggle{display:none;}
+ .menu-toggle{display:none;}
 
-  /* ---------- Main ---------- */
-  main{
-    margin-left:var(--sidebar-w);
-    position:relative;
-    z-index:1;
-  }
-  section{
-    padding:88px 64px;
-    max-width:860px;
-    border-bottom:1px solid var(--line);
-  }
-  section:last-of-type{border-bottom:none;}
+ /* ---------- Main ---------- */
+ main{
+ margin-left:var(--sidebar-w);
+ position:relative;
+ z-index:1;
+ }
+ section{
+ padding:clamp(48px, 9vw, 88px) clamp(20px, 6vw, 64px);
+ max-width:860px;
+ border-bottom:1px solid var(--line);
+ }
+ section:last-of-type{border-bottom:none;}
 
-  .kicker{
-    font-family:var(--mono);
-    font-size:.72rem;
-    color:var(--ink-soft);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
-  }
-  .kicker::before{
-    content:"";
-    width:22px;height:1px;
-    background:var(--blue);
-  }
-  h2.title{
-    font-size:1.7rem;
-    font-weight:700;
-    color:var(--ink);
-    margin-bottom:28px;
-    max-width:20ch;
-  }
+ .kicker{
+ font-family:var(--mono);
+ font-size:.72rem;
+ color:var(--ink-soft);
+ display:flex;
+ align-items:center;
+ gap:10px;
+ margin-bottom:18px;
+ }
+ .kicker::before{
+ content:"";
+ width:22px;height:1px;
+ background:var(--blue);
+ }
+ h2.title{
+ font-size:clamp(1.35rem, 3.2vw, 1.7rem);
+ font-weight:700;
+ color:var(--ink);
+ margin-bottom:28px;
+ max-width:20ch;
+ }
 
-  /* ---------- Hero ---------- */
-  #inicio{
-    padding-top:64px;
-    min-height:92vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-  }
-  .hero-role{
-    font-family:var(--mono);
-    font-size:.82rem;
-    color:var(--blue);
-    margin-bottom:18px;
-  }
-  .hero h1{
-    font-size:3.1rem;
-    line-height:1.05;
-    font-weight:700;
-    color:var(--ink);
-    max-width:11ch;
-  }
-  .hero .tagline{
-    margin-top:22px;
-    max-width:46ch;
-    color:var(--ink-soft);
-    font-size:1.02rem;
-  }
-  .hero-actions{
-    display:flex;
-    gap:14px;
-    margin-top:34px;
-    flex-wrap:wrap;
-  }
-  .btn{
-    font-family:var(--mono);
-    font-size:.8rem;
-    padding:12px 20px;
-    border:1.5px solid var(--ink);
-    color:var(--ink);
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-  }
-  .btn.primary{
-    background:var(--ink);
-    color:#fff;
-    border-color:var(--ink);
-  }
-  .btn:hover{background:var(--ink);color:#fff;}
-  .btn.primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);}
+ /* ---------- Hero ---------- */
+ #inicio{
+ padding-top:clamp(48px, 10vh, 64px);
+ min-height:min(92vh, 720px);
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ }
+ .hero-role{
+ font-family:var(--mono);
+ font-size:.82rem;
+ color:var(--blue);
+ margin-bottom:18px;
+ }
+ .hero h1{
+ font-size:clamp(2rem, 6.5vw, 3.1rem);
+ line-height:1.08;
+ font-weight:700;
+ color:var(--ink);
+ max-width:11ch;
+ word-wrap:break-word;
+ }
+ .hero .tagline{
+ margin-top:22px;
+ max-width:46ch;
+ color:var(--ink-soft);
+ font-size:clamp(.92rem, 2vw, 1.02rem);
+ }
+ .hero-actions{
+ display:flex;
+ gap:14px;
+ margin-top:34px;
+ flex-wrap:wrap;
+ }
+ .btn{
+ font-family:var(--mono);
+ font-size:.8rem;
+ padding:12px 20px;
+ border:1.5px solid var(--ink);
+ color:var(--ink);
+ text-decoration:none;
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ }
+ .btn.primary{
+ background:var(--ink);
+ color:#fff;
+ border-color:var(--ink);
+ }
+ .btn:hover{background:var(--ink);color:#fff;}
+ .btn.primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);}
 
-  /* port status strip */
-  .ports{
-    margin-top:56px;
-    display:flex;
-    gap:26px;
-    flex-wrap:wrap;
-  }
-  .port{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-  }
-  .port .led{
-    width:34px;height:8px;
-    background:#DCE3D8;
-    border:1px solid var(--line);
-    position:relative;
-    overflow:hidden;
-  }
-  .port .led::after{
-    content:"";
-    position:absolute;
-    left:0;top:0;bottom:0;
-    width:70%;
-    background:var(--green);
-  }
-  .port span{
-    font-family:var(--mono);
-    font-size:.66rem;
-    color:var(--ink-soft);
-  }
+ /* port status strip */
+ .ports{
+ margin-top:56px;
+ display:flex;
+ gap:26px;
+ flex-wrap:wrap;
+ }
+ .port{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ gap:10px;
+ }
+ .port .led{
+ width:34px;height:8px;
+ background:#DCE3D8;
+ border:1px solid var(--line);
+ position:relative;
+ overflow:hidden;
+ }
+ .port .led::after{
+ content:"";
+ position:absolute;
+ left:0;top:0;bottom:0;
+ width:70%;
+ background:var(--green);
+ }
+ .port span{
+ font-family:var(--mono);
+ font-size:.66rem;
+ color:var(--ink-soft);
+ }
 
-  /* ---------- Sobre mi ---------- */
-  .about-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:48px;
-  }
-  .about-grid p{color:var(--ink-soft);}
-  .about-grid p + p{margin-top:14px;}
-  .lang-list{display:flex;flex-direction:column;gap:16px;}
-  .lang-row{display:flex;flex-direction:column;gap:6px;}
-  .lang-row .top{display:flex;justify-content:space-between;font-size:.85rem;}
-  .lang-row .top span:last-child{font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);}
-  .bars{display:flex;gap:4px;}
-  .bars i{
-    width:16px;height:6px;
-    background:var(--line);
-    display:block;
-  }
-  .bars i.on{background:var(--blue);}
+ /* ---------- Sobre mi ---------- */
+ .about-grid{
+ display:grid;
+ grid-template-columns:1.4fr 1fr;
+ gap:48px;
+ }
+ .about-grid p{color:var(--ink-soft);}
+ .about-grid p + p{margin-top:14px;}
+ .lang-list{display:flex;flex-direction:column;gap:16px;}
+ .lang-row{display:flex;flex-direction:column;gap:6px;}
+ .lang-row .top{display:flex;justify-content:space-between;font-size:.85rem;}
+ .lang-row .top span:last-child{font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);}
+ .bars{display:flex;gap:4px;}
+ .bars i{
+ width:16px;height:6px;
+ background:var(--line);
+ display:block;
+ }
+ .bars i.on{background:var(--blue);}
 
-  /* ---------- Habilidades: patch panel ---------- */
-  .panel-block{margin-bottom:40px;}
-  .panel-block:last-child{margin-bottom:0;}
-  .panel-block h3{
-    font-family:var(--mono);
-    font-size:.78rem;
-    color:var(--ink-soft);
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .panel-block h3::before{
-    content:"";
-    width:6px;height:6px;
-    background:var(--amber);
-  }
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-  }
-  .chip{
-    font-size:.82rem;
-    padding:8px 14px;
-    background:var(--panel);
-    border:1px solid var(--line);
-    color:var(--ink);
-  }
+ /* ---------- Habilidades: patch panel ---------- */
+ .panel-block{margin-bottom:40px;}
+ .panel-block:last-child{margin-bottom:0;}
+ .panel-block h3{
+ font-family:var(--mono);
+ font-size:.78rem;
+ color:var(--ink-soft);
+ margin-bottom:14px;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ }
+ .panel-block h3::before{
+ content:"";
+ width:6px;height:6px;
+ background:var(--amber);
+ }
+ .chips{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ }
+ .chip{
+ font-size:.82rem;
+ padding:8px 14px;
+ background:var(--panel);
+ border:1px solid var(--line);
+ color:var(--ink);
+ }
 
-  /* ---------- Experiencia ---------- */
-  .job{
-    border-left:2px solid var(--line);
-    padding-left:26px;
-    position:relative;
-  }
-  .job::before{
-    content:"";
-    position:absolute;
-    left:-6px;top:4px;
-    width:10px;height:10px;
-    background:var(--bg);
-    border:2px solid var(--blue);
-  }
-  .job-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:6px;
-  }
-  .job-head h3{font-size:1.1rem;font-weight:600;}
-  .job-head .when{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
-  .job-sub{color:var(--blue);font-size:.85rem;margin-bottom:14px;}
-  .job ul{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
-  .job li{
-    font-size:.88rem;
-    color:var(--ink-soft);
-    padding-left:14px;
-    position:relative;
-  }
-  .job li::before{
-    content:"–";
-    position:absolute;left:0;top:0;
-    color:var(--amber);
-  }
+ /* ---------- Experiencia ---------- */
+ .job{
+ border-left:2px solid var(--line);
+ padding-left:26px;
+ position:relative;
+ }
+ .job::before{
+ content:"";
+ position:absolute;
+ left:-6px;top:4px;
+ width:10px;height:10px;
+ background:var(--bg);
+ border:2px solid var(--blue);
+ }
+ .job-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:baseline;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-bottom:6px;
+ }
+ .job-head h3{font-size:1.1rem;font-weight:600;}
+ .job-head .when{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
+ .job-sub{color:var(--blue);font-size:.85rem;margin-bottom:14px;}
+ .job ul{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
+ .job li{
+ font-size:.88rem;
+ color:var(--ink-soft);
+ padding-left:14px;
+ position:relative;
+ }
+ .job li::before{
+ content:"–";
+ position:absolute;left:0;top:0;
+ color:var(--amber);
+ }
 
-  /* ---------- Educacion ---------- */
-  .edu-item{
-    display:grid;
-    grid-template-columns:150px 1fr;
-    gap:24px;
-    padding:20px 0;
-    border-top:1px solid var(--line);
-  }
-  .edu-item:last-child{border-bottom:1px solid var(--line);}
-  .edu-item .when{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
-  .edu-item h3{font-size:1rem;font-weight:600;margin-bottom:8px;}
-  .edu-item ul li{
-    font-size:.85rem;
-    color:var(--ink-soft);
-    padding:2px 0 2px 14px;
-    position:relative;
-  }
-  .edu-item ul li::before{
-    content:"·";
-    position:absolute;left:0;color:var(--blue);
-  }
+ /* ---------- Educacion ---------- */
+ .edu-item{
+ display:grid;
+ grid-template-columns:150px 1fr;
+ gap:24px;
+ padding:20px 0;
+ border-top:1px solid var(--line);
+ }
+ .edu-item:last-child{border-bottom:1px solid var(--line);}
+ .edu-item .when{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
+ .edu-item h3{font-size:1rem;font-weight:600;margin-bottom:8px;}
+ .edu-item ul li{
+ font-size:.85rem;
+ color:var(--ink-soft);
+ padding:2px 0 2px 14px;
+ position:relative;
+ }
+ .edu-item ul li::before{
+ content:"·";
+ position:absolute;left:0;color:var(--blue);
+ }
 
-  /* ---------- Contacto ---------- */
-  .contact-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-  }
-  .contact-card{
-    border:1px solid var(--line);
-    background:var(--panel);
-    padding:20px;
-    text-decoration:none;
-    color:var(--ink);
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-  .contact-card:hover{border-color:var(--blue);}
-  .contact-card .label{color:var(--ink-soft);}
-  .contact-card .value{font-size:.95rem;word-break:break-word;}
+ /* ---------- Contacto ---------- */
+ .contact-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:16px;
+ }
+ .contact-card{
+ border:1px solid var(--line);
+ background:var(--panel);
+ padding:20px;
+ text-decoration:none;
+ color:var(--ink);
+ display:flex;
+ flex-direction:column;
+ gap:6px;
+ }
+ .contact-card:hover{border-color:var(--blue);}
+ .contact-card .label{color:var(--ink-soft);}
+ .contact-card .value{font-size:.95rem;word-break:break-word;}
 
-  footer{
-    text-align:center;
-    padding:26px;
-    font-family:var(--mono);
-    font-size:.7rem;
-    color:var(--ink-soft);
-  }
+ footer{
+ text-align:center;
+ padding:26px;
+ font-family:var(--mono);
+ font-size:.7rem;
+ color:var(--ink-soft);
+ }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width:900px){
-    .about-grid{grid-template-columns:1fr;}
-    .job ul{grid-template-columns:1fr;}
-    .contact-grid{grid-template-columns:1fr;}
-  }
+ /* ---------- Responsive ---------- */
 
-  @media (max-width:760px){
-    :root{--sidebar-w:0px;}
-    .sidebar{
-      width:100%;
-      height:auto;
-      flex-direction:row;
-      align-items:center;
-      padding:16px 20px;
-      position:fixed;
-    }
-    .sidebar .id .mark{display:none;}
-    .sidebar .id{flex-direction:row;align-items:center;gap:10px;}
-    .sidebar .id h1{font-size:.92rem;}
-    .sidebar .id span{display:none;}
-    .sidebar nav{
-      position:fixed;
-      top:58px; left:0; right:0;
-      background:var(--blue-deep);
-      margin-top:0;
-      flex-direction:column;
-      padding:10px 20px 20px;
-      display:none;
-    }
-    .sidebar nav.open{display:flex;}
-    .sidebar .foot{display:none;}
-    .menu-toggle{
-      display:block;
-      margin-left:auto;
-      background:none;
-      border:1px solid #6E90C9;
-      color:#fff;
-      font-family:var(--mono);
-      font-size:.7rem;
-      padding:8px 12px;
-    }
-    main{margin-left:0;padding-top:58px;}
-    section{padding:56px 24px;}
-    .hero h1{font-size:2.2rem;max-width:100%;}
-  }
+ /* Tablet: sidebar se angosta, grids de 2 columnas pasan a 1 */
+ @media (max-width:1024px){
+ :root{--sidebar-w:210px;}
+ .sidebar{padding:28px 20px;}
+ }
+
+ @media (max-width:900px){
+ .about-grid{grid-template-columns:1fr;gap:32px;}
+ .job ul{grid-template-columns:1fr;}
+ .contact-grid{grid-template-columns:1fr;}
+ }
+
+ /* Mobile: sidebar se convierte en header fijo con menú desplegable */
+ @media (max-width:760px){
+ :root{--sidebar-w:0px;--header-h:60px;}
+ .sidebar{
+ width:100%;
+ height:var(--header-h);
+ flex-direction:row;
+ align-items:center;
+ padding:0 20px;
+ position:fixed;
+ z-index:20;
+ }
+ .sidebar .id .mark{display:none;}
+ .sidebar .id{flex-direction:row;align-items:center;gap:10px;}
+ .sidebar .id h1{font-size:.92rem;}
+ .sidebar .id span{display:none;}
+ .sidebar nav{
+ position:fixed;
+ top:var(--header-h); left:0; right:0;
+ background:var(--blue-deep);
+ margin-top:0;
+ flex-direction:column;
+ padding:10px 20px 20px;
+ display:none;
+ max-height:calc(100vh - var(--header-h));
+ overflow-y:auto;
+ }
+ .sidebar nav.open{display:flex;}
+ .sidebar .foot{display:none;}
+ .menu-toggle{
+ display:block;
+ margin-left:auto;
+ background:none;
+ border:1px solid #6E90C9;
+ color:#fff;
+ font-family:var(--mono);
+ font-size:.7rem;
+ padding:8px 12px;
+ flex:none;
+ }
+ main{margin-left:0;padding-top:var(--header-h);}
+ .hero h1{max-width:100%;}
+ .ports{gap:18px 22px;}
+ .edu-item{grid-template-columns:1fr;gap:6px;}
+ .edu-item .when{order:-1;}
+ }
+
+ /* Teléfonos chicos */
+ @media (max-width:420px){
+ .hero-actions{flex-direction:column;align-items:stretch;}
+ .btn{justify-content:center;}
+ .port{flex:1 1 40%;}
+ .chip{font-size:.76rem;padding:7px 11px;}
+ .contact-card{padding:16px;}
+ .job{padding-left:20px;}
+ }
 </style>
 </head>
 <body>
 
 <aside class="sidebar">
-  <div class="id">
-    <div class="mark">NJ</div>
-    <h1>Nike Jean Baptiste</h1>
-    <span>Soporte &amp; Redes</span>
-  </div>
+ <div class="id">
+ <div class="mark">NJ</div>
+ <h1>Nike Jean Baptiste</h1>
+ <span>Soporte &amp; Redes</span>
+ </div>
 
-  <button class="menu-toggle" id="menuToggle">MENÚ</button>
+ <button class="menu-toggle" id="menuToggle">MENÚ</button>
 
-  <nav id="navMenu">
-    <a href="#inicio" class="active"><span class="dot"></span>Inicio</a>
-    <a href="#sobre-mi"><span class="dot"></span>Sobre mí</a>
-    <a href="#habilidades"><span class="dot"></span>Habilidades</a>
-    <a href="#experiencia"><span class="dot"></span>Experiencia</a>
-    <a href="#educacion"><span class="dot"></span>Educación</a>
-    <a href="#contacto"><span class="dot"></span>Contacto</a>
-  </nav>
+ <nav id="navMenu">
+ <a href="#inicio" class="active"><span class="dot"></span>Inicio</a>
+ <a href="#sobre-mi"><span class="dot"></span>Sobre mí</a>
+ <a href="#habilidades"><span class="dot"></span>Habilidades</a>
+ <a href="#experiencia"><span class="dot"></span>Experiencia</a>
+ <a href="#educacion"><span class="dot"></span>Educación</a>
+ <a href="#contacto"><span class="dot"></span>Contacto</a>
+ </nav>
 
-  <div class="foot">
-    Cap. Federal, Bs. As.<br>
-    <a href="mailto:nikejeanbaptiste22@gmail.com">nikejeanbaptiste22@gmail.com</a><br>
-    <a href="https://www.linkedin.com/in/nike-jean-baptiste-b35ab7228" target="_blank" rel="noopener">LinkedIn ↗</a>
-  </div>
+ <div class="foot">
+ Cap. Federal, Bs. As.<br>
+ <a href="mailto:nikejeanbaptiste22@gmail.com">nikejeanbaptiste22@gmail.com</a><br>
+ <a href="https://www.linkedin.com/in/nike-jean-baptiste-b35ab7228" target="_blank" rel="noopener">LinkedIn ↗</a>
+ </div>
 </aside>
 
 <main>
 
-  <section id="inicio" class="hero">
-    <div class="hero-role">CCNA · SOPORTE TÉCNICO · SEGURIDAD DE RED</div>
-    <h1>Nike Jean Baptiste</h1>
-    <p class="tagline">
-      Instalo, configuro y mantengo redes y equipos para que el usuario del otro lado
-      no tenga que pensar en la infraestructura. Certificado por Cisco Networking Academy,
-      con base en administración de redes, ciberseguridad y soporte técnico.
-    </p>
-    <div class="hero-actions">
-      <a class="btn primary" href="CV_NIKE_JEAN_BAPTISTE_SOPORTE_TECNICO.pdf" download>Descargar CV</a>
-      <a class="btn" href="#contacto">Contactar</a>
-    </div>
+ <section id="inicio" class="hero">
+ <div class="hero-role">CCNA · SOPORTE TÉCNICO · SEGURIDAD DE RED</div>
+ <h1>Nike Jean Baptiste</h1>
+ <p class="tagline">
+ Instalo, configuro y mantengo redes y equipos para que el usuario del otro lado
+ no tenga que pensar en la infraestructura. Certificado por Cisco Networking Academy,
+ con base en administración de redes, ciberseguridad y soporte técnico.
+ </p>
+ <div class="hero-actions">
+ <a class="btn primary" href="CV_NIKE_JEAN_BAPTISTE_SOPORTE_TECNICO.pdf" download>Descargar CV</a>
+ <a class="btn" href="#contacto">Contactar</a>
+ </div>
 
-    <div class="ports">
-      <div class="port"><div class="led"></div><span>REDES</span></div>
-      <div class="port"><div class="led"></div><span>SEGURIDAD</span></div>
-      <div class="port"><div class="led"></div><span>SISTEMAS</span></div>
-      <div class="port"><div class="led"></div><span>BASES DE DATOS</span></div>
-      <div class="port"><div class="led"></div><span>SOPORTE</span></div>
-    </div>
-  </section>
+ <div class="ports">
+ <div class="port"><div class="led"></div><span>REDES</span></div>
+ <div class="port"><div class="led"></div><span>SEGURIDAD</span></div>
+ <div class="port"><div class="led"></div><span>SISTEMAS</span></div>
+ <div class="port"><div class="led"></div><span>BASES DE DATOS</span></div>
+ <div class="port"><div class="led"></div><span>SOPORTE</span></div>
+ </div>
+ </section>
 
-  <section id="sobre-mi">
-    <div class="kicker">01 / SOBRE MÍ</div>
-    <h2 class="title">Objetivo profesional</h2>
-    <div class="about-grid">
-      <div>
-        <p>
-          Profesional con más de dos años de formación y experiencia práctica en administración
-          de redes, soporte técnico, instalación de software, armado y mantenimiento de equipos,
-          configuración de redes y atención al usuario.
-        </p>
-        <p>
-          Certificado por Cisco Networking Academy, con conocimientos en ciberseguridad, bases
-          de datos, testing de aplicaciones y programación para análisis de datos con Python.
-        </p>
-        <p>
-          Apasionado por la tecnología, me mantengo en constante actualización y disfruto
-          enfrentar desafíos técnicos para brindar soluciones efectivas.
-        </p>
-        <p>
-          Busco una oportunidad en el sector IT que me permita aportar valor, crecer
-          profesionalmente y seguir desarrollando mis habilidades en un entorno dinámico.
-        </p>
-      </div>
-      <div class="lang-list">
-        <div class="lang-row">
-          <div class="top"><span>Español</span><span>NATIVO</span></div>
-          <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-        </div>
-        <div class="lang-row">
-          <div class="top"><span>Criollo Haitiano</span><span>NATIVO</span></div>
-          <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-        </div>
-        <div class="lang-row">
-          <div class="top"><span>Francés</span><span>NATIVO</span></div>
-          <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-        </div>
-        <div class="lang-row">
-          <div class="top"><span>Inglés</span><span>INTERMEDIO B1</span></div>
-          <div class="bars"><i class="on"></i><i class="on"></i><i></i><i></i></div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <section id="sobre-mi">
+ <div class="kicker">01 / SOBRE MÍ</div>
+ <h2 class="title">Objetivo profesional</h2>
+ <div class="about-grid">
+ <div>
+ <p>
+ Profesional con más de dos años de formación y experiencia práctica en administración
+ de redes, soporte técnico, instalación de software, armado y mantenimiento de equipos,
+ configuración de redes y atención al usuario.
+ </p>
+ <p>
+ Certificado por Cisco Networking Academy, con conocimientos en ciberseguridad, bases
+ de datos, testing de aplicaciones y programación para análisis de datos con Python.
+ </p>
+ <p>
+ Apasionado por la tecnología, me mantengo en constante actualización y disfruto
+ enfrentar desafíos técnicos para brindar soluciones efectivas.
+ </p>
+ <p>
+ Busco una oportunidad en el sector IT que me permita aportar valor, crecer
+ profesionalmente y seguir desarrollando mis habilidades en un entorno dinámico.
+ </p>
+ </div>
+ <div class="lang-list">
+ <div class="lang-row">
+ <div class="top"><span>Español</span><span>NATIVO</span></div>
+ <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+ </div>
+ <div class="lang-row">
+ <div class="top"><span>Criollo Haitiano</span><span>NATIVO</span></div>
+ <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+ </div>
+ <div class="lang-row">
+ <div class="top"><span>Francés</span><span>NATIVO</span></div>
+ <div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+ </div>
+ <div class="lang-row">
+ <div class="top"><span>Inglés</span><span>INTERMEDIO B1</span></div>
+ <div class="bars"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-  <section id="habilidades">
-    <div class="kicker">02 / HABILIDADES</div>
-    <h2 class="title">Panel de conocimientos</h2>
+ <section id="habilidades">
+ <div class="kicker">02 / HABILIDADES</div>
+ <h2 class="title">Panel de conocimientos</h2>
 
-    <div class="panel-block">
-      <h3>Redes y soporte técnico</h3>
-      <div class="chips">
-        <span class="chip">Armado y cableado</span>
-        <span class="chip">Router / Switches</span>
-        <span class="chip">Access Points</span>
-        <span class="chip">Servidores</span>
-        <span class="chip">VPN</span>
-        <span class="chip">Firewall</span>
-        <span class="chip">Telefonía IP / VoIP</span>
-        <span class="chip">TCP/IP</span>
-        <span class="chip">Modelo OSI</span>
-        <span class="chip">Direccionamiento IP</span>
-        <span class="chip">Diagnóstico de red</span>
-        <span class="chip">Seguridad de red</span>
-        <span class="chip">DHCP</span>
-        <span class="chip">Routing</span>
-        <span class="chip">ACLs</span>
-        <span class="chip">VLANs / troncales</span>
-        <span class="chip">STP</span>
-        <span class="chip">EtherChannel</span>
-        <span class="chip">WLAN</span>
-        <span class="chip">NAT</span>
-      </div>
-    </div>
+ <div class="panel-block">
+ <h3>Redes y soporte técnico</h3>
+ <div class="chips">
+ <span class="chip">Armado y cableado</span>
+ <span class="chip">Router / Switches</span>
+ <span class="chip">Access Points</span>
+ <span class="chip">Servidores</span>
+ <span class="chip">VPN</span>
+ <span class="chip">Firewall</span>
+ <span class="chip">Telefonía IP / VoIP</span>
+ <span class="chip">TCP/IP</span>
+ <span class="chip">Modelo OSI</span>
+ <span class="chip">Direccionamiento IP</span>
+ <span class="chip">Diagnóstico de red</span>
+ <span class="chip">Seguridad de red</span>
+ <span class="chip">DHCP</span>
+ <span class="chip">Routing</span>
+ <span class="chip">ACLs</span>
+ <span class="chip">VLANs / troncales</span>
+ <span class="chip">STP</span>
+ <span class="chip">EtherChannel</span>
+ <span class="chip">WLAN</span>
+ <span class="chip">NAT</span>
+ </div>
+ </div>
 
-    <div class="panel-block">
-      <h3>Bases de datos &amp; CRM</h3>
-      <div class="chips">
-        <span class="chip">MySQL</span>
-        <span class="chip">Tableau</span>
-        <span class="chip">Salesforce</span>
-      </div>
-    </div>
+ <div class="panel-block">
+ <h3>Bases de datos &amp; CRM</h3>
+ <div class="chips">
+ <span class="chip">MySQL</span>
+ <span class="chip">Tableau</span>
+ <span class="chip">Salesforce</span>
+ </div>
+ </div>
 
-    <div class="panel-block">
-      <h3>Sistemas &amp; programación</h3>
-      <div class="chips">
-        <span class="chip">Windows</span>
-        <span class="chip">Linux</span>
-        <span class="chip">Python</span>
-        <span class="chip">Office 365</span>
-      </div>
-    </div>
+ <div class="panel-block">
+ <h3>Sistemas &amp; programación</h3>
+ <div class="chips">
+ <span class="chip">Windows</span>
+ <span class="chip">Linux</span>
+ <span class="chip">Python</span>
+ <span class="chip">Office 365</span>
+ </div>
+ </div>
 
-    <div class="panel-block">
-      <h3>Habilidades blandas</h3>
-      <div class="chips">
-        <span class="chip">Pensamiento analítico</span>
-        <span class="chip">Documentación de red</span>
-        <span class="chip">Adaptación laboral</span>
-        <span class="chip">Resolución de problemas</span>
-      </div>
-    </div>
-  </section>
+ <div class="panel-block">
+ <h3>Habilidades blandas</h3>
+ <div class="chips">
+ <span class="chip">Pensamiento analítico</span>
+ <span class="chip">Documentación de red</span>
+ <span class="chip">Adaptación laboral</span>
+ <span class="chip">Resolución de problemas</span>
+ </div>
+ </div>
+ </section>
 
-  <section id="experiencia">
-    <div class="kicker">03 / EXPERIENCIA</div>
-    <h2 class="title">Trayectoria profesional</h2>
+ <section id="experiencia">
+ <div class="kicker">03 / EXPERIENCIA</div>
+ <h2 class="title">Trayectoria profesional</h2>
 
-    <div class="job">
-      <div class="job-head">
-        <h3>Soporte Técnico — Autónomo</h3>
-        <span class="when">02/2023 — Actualidad</span>
-      </div>
-      <div class="job-sub">Freelance</div>
-      <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:16px;">
-        Asistencia a usuarios particulares, referidos y compañeros en la resolución de
-        incidencias informáticas de todo tipo.
-      </p>
-      <ul>
-        <li>Instalación de PC e impresoras, configuración de red</li>
-        <li>Mantenimiento y armado de equipos</li>
-        <li>Uso de Active Directory</li>
-        <li>Configuración de red en servidores</li>
-        <li>Inventario de equipos</li>
-        <li>Configuración de Access Points y Switches</li>
-        <li>Atención a usuarios mediante ticketera</li>
-        <li>Soporte remoto con AnyDesk y Windows Remote</li>
-        <li>Redes básicas y atención a usuarios</li>
-        <li>Instalación de sistemas operativos y software</li>
-      </ul>
-    </div>
-  </section>
+ <div class="job">
+ <div class="job-head">
+ <h3>Soporte Técnico — Autónomo</h3>
+ <span class="when">02/2023 — Actualidad</span>
+ </div>
+ <div class="job-sub">Freelance</div>
+ <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:16px;">
+ Asistencia a usuarios particulares, referidos y compañeros en la resolución de
+ incidencias informáticas de todo tipo.
+ </p>
+ <ul>
+ <li>Instalación de PC e impresoras, configuración de red</li>
+ <li>Mantenimiento y armado de equipos</li>
+ <li>Uso de Active Directory</li>
+ <li>Configuración de red en servidores</li>
+ <li>Inventario de equipos</li>
+ <li>Configuración de Access Points y Switches</li>
+ <li>Atención a usuarios mediante ticketera</li>
+ <li>Soporte remoto con AnyDesk y Windows Remote</li>
+ <li>Redes básicas y atención a usuarios</li>
+ <li>Instalación de sistemas operativos y software</li>
+ </ul>
+ </div>
+ </section>
 
-  <section id="educacion">
-    <div class="kicker">04 / EDUCACIÓN</div>
-    <h2 class="title">Formación académica</h2>
+ <section id="educacion">
+ <div class="kicker">04 / EDUCACIÓN</div>
+ <h2 class="title">Formación académica</h2>
 
-    <div class="edu-item">
-      <div class="when">2024 — 2025</div>
-      <div>
-        <h3>Cisco Networking Academy</h3>
-        <ul>
-          <li>Carrera profesional de especialista en soporte de TI</li>
-          <li>IT Essentials</li>
-          <li>CCNA I · Introducción a las redes</li>
-          <li>CCNA II · Switching, Routing and Wireless Essentials</li>
-          <li>Examen de la Carrera Profesional de Técnico en Redes</li>
-          <li>Soporte y Seguridad de Red</li>
-          <li>Introduction to Cybersecurity</li>
-          <li>Using Computer and Mobile Devices</li>
-          <li>Conceptos básicos de hardware de computadora</li>
-          <li>Direccionamiento de red y solución de problemas básicos</li>
-          <li>English for IT 1 &amp; 2 · English Discoveries Placement Test (Intermediate 1)</li>
-        </ul>
-      </div>
-    </div>
+ <div class="edu-item">
+ <div class="when">2024 — 2025</div>
+ <div>
+ <h3>Cisco Networking Academy</h3>
+ <ul>
+ <li>Carrera profesional de especialista en soporte de TI</li>
+ <li>IT Essentials</li>
+ <li>CCNA I · Introducción a las redes</li>
+ <li>CCNA II · Switching, Routing and Wireless Essentials</li>
+ <li>Examen de la Carrera Profesional de Técnico en Redes</li>
+ <li>Soporte y Seguridad de Red</li>
+ <li>Introduction to Cybersecurity</li>
+ <li>Using Computer and Mobile Devices</li>
+ <li>Conceptos básicos de hardware de computadora</li>
+ <li>Direccionamiento de red y solución de problemas básicos</li>
+ <li>English for IT 1 &amp; 2 · English Discoveries Placement Test (Intermediate 1)</li>
+ </ul>
+ </div>
+ </div>
 
-    <div class="edu-item">
-      <div class="when">2025</div>
-      <div>
-        <h3>Universidad Nacional de Avellaneda</h3>
-        <ul><li>Programación en Python para análisis de datos</li></ul>
-      </div>
-    </div>
+ <div class="edu-item">
+ <div class="when">2025</div>
+ <div>
+ <h3>Universidad Nacional de Avellaneda</h3>
+ <ul><li>Programación en Python para análisis de datos</li></ul>
+ </div>
+ </div>
 
-    <div class="edu-item">
-      <div class="when">2025</div>
-      <div>
-        <h3>CFP N.º 8 SMATA</h3>
-        <ul>
-          <li>Trayecto formativo: Instalador y Soporte de Sistemas Informáticos</li>
-          <li>Tester de aplicaciones</li>
-        </ul>
-      </div>
-    </div>
+ <div class="edu-item">
+ <div class="when">2025</div>
+ <div>
+ <h3>CFP N.º 8 SMATA</h3>
+ <ul>
+ <li>Trayecto formativo: Instalador y Soporte de Sistemas Informáticos</li>
+ <li>Tester de aplicaciones</li>
+ </ul>
+ </div>
+ </div>
 
-    <div class="edu-item">
-      <div class="when">En curso</div>
-      <div>
-        <h3>IFTS N.º 29</h3>
-        <ul><li>Tecnicatura Superior en Desarrollo de Software</li></ul>
-      </div>
-    </div>
-  </section>
+ <div class="edu-item">
+ <div class="when">En curso</div>
+ <div>
+ <h3>IFTS N.º 29</h3>
+ <ul><li>Tecnicatura Superior en Desarrollo de Software</li></ul>
+ </div>
+ </div>
+ </section>
 
-  <section id="contacto">
-    <div class="kicker">05 / CONTACTO</div>
-    <h2 class="title">Hablemos</h2>
-    <div class="contact-grid">
-      <a class="contact-card" href="mailto:nikejeanbaptiste22@gmail.com">
-        <span class="label">EMAIL</span>
-        <span class="value">nikejeanbaptiste22@gmail.com</span>
-      </a>
-      <a class="contact-card" href="tel:+541168047974">
-        <span class="label">TELÉFONO</span>
-        <span class="value">11 6804-7974</span>
-      </a>
-      <a class="contact-card" href="https://www.linkedin.com/in/nike-jean-baptiste-b35ab7228" target="_blank" rel="noopener">
-        <span class="label">LINKEDIN</span>
-        <span class="value">/in/nike-jean-baptiste-b35ab7228</span>
-      </a>
-      <a class="contact-card" href="https://www.credly.com/users/nike-jean-baptiste" target="_blank" rel="noopener">
-        <span class="label">CREDLY</span>
-        <span class="value">Insignias y certificaciones</span>
-      </a>
-    </div>
-  </section>
+ <section id="contacto">
+ <div class="kicker">05 / CONTACTO</div>
+ <h2 class="title">Hablemos</h2>
+ <div class="contact-grid">
+ <a class="contact-card" href="mailto:nikejeanbaptiste22@gmail.com">
+ <span class="label">EMAIL</span>
+ <span class="value">nikejeanbaptiste22@gmail.com</span>
+ </a>
+ <a class="contact-card" href="tel:+541168047974">
+ <span class="label">TELÉFONO</span>
+ <span class="value">11 6804-7974</span>
+ </a>
+ <a class="contact-card" href="https://www.linkedin.com/in/nike-jean-baptiste-b35ab7228" target="_blank" rel="noopener">
+ <span class="label">LINKEDIN</span>
+ <span class="value">/in/nike-jean-baptiste-b35ab7228</span>
+ </a>
+ <a class="contact-card" href="https://www.credly.com/users/nike-jean-baptiste" target="_blank" rel="noopener">
+ <span class="label">CREDLY</span>
+ <span class="value">Insignias y certificaciones</span>
+ </a>
+ </div>
+ </section>
 
-  <footer>© 2026 Nike Jean Baptiste · Capital Federal, Buenos Aires</footer>
+ <footer>© 2026 Nike Jean Baptiste · Capital Federal, Buenos Aires</footer>
 </main>
 
 <script>
-  // Menú móvil
-  const toggle = document.getElementById('menuToggle');
-  const nav = document.getElementById('navMenu');
-  toggle && toggle.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+ // Menú móvil
+ const toggle = document.getElementById('menuToggle');
+ const nav = document.getElementById('navMenu');
+ toggle && toggle.addEventListener('click', () => nav.classList.toggle('open'));
+ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-  // Resaltar enlace activo según sección visible
-  const sections = document.querySelectorAll('main section[id]');
-  const links = document.querySelectorAll('.sidebar nav a');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector('.sidebar nav a[href="#' + entry.target.id + '"]');
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
+ // Resaltar enlace activo según sección visible
+ const sections = document.querySelectorAll('main section[id]');
+ const links = document.querySelectorAll('.sidebar nav a');
+ const observer = new IntersectionObserver((entries) => {
+ entries.forEach(entry => {
+ if (entry.isIntersecting) {
+ links.forEach(l => l.classList.remove('active'));
+ const active = document.querySelector('.sidebar nav a[href="#' + entry.target.id + '"]');
+ if (active) active.classList.add('active');
+ }
+ });
+ }, { rootMargin: '-40% 0px -55% 0px' });
+ sections.forEach(s => observer.observe(s));
 </script>
 
 </body>
